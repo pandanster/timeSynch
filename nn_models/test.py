@@ -35,15 +35,12 @@ net.eval()
 labels=[]
 predictions=[]
 m=nn.Softmax(dim=1)
-for epoch in range(100):
-	running_loss=0
-	batchCount=0
-	for data in timeSynchDataLoader:
-		net.zero_grad()		
-		y=net({'accl':[data[i][0] for i in range(len(data))],'laccl':[data[i][1] for i in range(len(data))],\
-			'gyro':[data[i][2] for i in range(len(data))]})
-		predictions+=torch.max(m(y),dim=1)[1].cpu().numpy().tolist()
-		labels=[data[i][3].cpu().numpy().tolist()[0] for i in range(len(data))]
+for data in timeSynchDataLoader:
+	net.zero_grad()		
+	y=net({'accl':[data[i][0] for i in range(len(data))],'laccl':[data[i][1] for i in range(len(data))],\
+		'gyro':[data[i][2] for i in range(len(data))]})
+	predictions+=torch.max(m(y),dim=1)[1].cpu().numpy().tolist()
+	labels=[data[i][3].cpu().numpy().tolist()[0] for i in range(len(data))]
 confusion,accuracy=computeAccuracy(labels,predictions,[i for i in range(len(classes))])
 logger.info("The accuracy for model: %s for 0 skip is: %s",70,accuracy)
 
