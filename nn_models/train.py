@@ -13,14 +13,14 @@ classes=['Forward', 'Front-block', 'Kick', 'Lower-block', 'Lower-punch', \
 sensorDetail={'right-hand':['Lower-punch','Straight-punch','Upper-punch','Upper-cut'], \
 'left-hand':['Front-block','Side-block','Upper-block','Lower-block'],'right-leg':['Forward','Raise','Kick']}
 #createTrainTest(userDirs,users,testCount,outFile,classes)
-dirPath='/mnt/d/time-synch/dataset-new'
-trainTestFile='/mnt/d/time-synch/nn_models/train-test-split'
-segmentfilepath='/mnt/d/time-synch/dataset_new.txt'
+dirPath='./dataset-new'
+trainTestFile='./train-test-split'
+segmentfilepath='./dataset_new.txt'
 #createTrainTest(dirpath,segmentfilepath,outfilepath,classes)
 #exit(0)
 trainDataset=timeSynchDataset(dirPath,classes,trainTestFile,segment=True,segmentFile=segmentfilepath,Train=True,\
 	skipsamplepercent=None,sensorDetail=sensorDetail	)
-saveDir='/scratch/psanthal/'
+saveDir='./'
 '''
 lowResnet Parameters
 hidden_dim,class_size,num_layers,batch_size,dropout,use_cuda,frameCount
